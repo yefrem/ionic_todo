@@ -42,7 +42,7 @@ describe('service', function() {
   });
 
   // Test service availability
-  it('check the existence of Tasks factory', inject(function(Tasks) {
+  it('checks the existence of Tasks factory', inject(function(Tasks) {
     expect(Tasks).toBeDefined();
   }));
 

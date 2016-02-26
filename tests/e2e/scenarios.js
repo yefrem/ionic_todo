@@ -1,5 +1,5 @@
 describe('TODO', function() {
-  // TODO: there should be the way to pre-set local storage data before testing
+  // TODO: there should be the way to pre-set local storage data before testing (UPD: probably using executeScript)
 
   it('shows and updates undone', function () {
     browser.get('#/tab/todo');
@@ -31,10 +31,16 @@ describe('TODO', function() {
 
   it("moves task to done tab when marked as done", function(){
     browser.get('#/tab/todo');
-    element(by.css('.undone-task .mark-as-done')).click();
+    //var doneButton = element(by.css('.undone-task .mark-as-done'));
+    //doneButton.click();
+
+    // workaround to click invisible button
+    // IRL I would find/develop working way to simulate swipe
+    browser.executeScript('angular.element(document.getElementsByClassName("mark-as-done")[0]).triggerHandler("click");');
+
     var tasks = element.all(by.css('.undone-task'));
     expect(tasks.count()).toBe(1);
-
+    //
     browser.get('#/tab/done');
     tasks = element.all(by.css('.done-task'));
     expect(tasks.count()).toBe(1);
@@ -42,14 +48,14 @@ describe('TODO', function() {
 
   it('properly removes undone task', function(){
     browser.get('#/tab/todo');
-    element(by.css('.undone-task .remove')).click();
+    browser.executeScript('angular.element(document.getElementsByClassName("remove")[0]).triggerHandler("click");');
     var tasks = element.all(by.css('.undone-task'));
     expect(tasks.count()).toBe(0);
   });
 
   it('properly removes done task', function(){
     browser.get('#/tab/done');
-    element(by.css('.done-task .remove')).click();
+    browser.executeScript('angular.element(document.getElementsByClassName("remove")[0]).triggerHandler("click");');
     var tasks = element.all(by.css('.done-task'));
     expect(tasks.count()).toBe(0);
   });

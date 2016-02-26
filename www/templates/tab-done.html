@@ -1,6 +1,14 @@
-<ion-view view-title="Done">
+<ion-view view-title="Done ({{tasks.length}})">
   <ion-content class="padding">
-    <h2>Done Stuff</h2>
+    <ion-list>
+      <ion-item class="item-remove-animate done-task" ng-repeat="task in tasks | orderBy:'-id'" type="item-text-wrap">
+        <h2>{{task.label}}</h2>
+        <i class="icon ion-chevron-right icon-accessory"></i>
 
+        <ion-option-button class="button-assertive remove" ng-click="remove(task)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

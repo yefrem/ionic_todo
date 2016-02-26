@@ -1,6 +1,25 @@
-<ion-view view-title="Done">
+<ion-view view-title="To Do ({{tasks.length}})">
   <ion-content class="padding">
-    <h2>Stuff To Do</h2>
+    <div class="bar bar-header item-input-inset">
+      <label class="item-input-wrapper">
+        <input type="search" placeholder="I want to..." ng-model="newTask">
+      </label>
+      <button class="button button-positive" ng-click="add(newTask);">
+        Add
+      </button>
+    </div>
 
+    <ion-list>
+      <ion-item class="item-remove-animate item-icon-right undone-task" ng-repeat="task in tasks | orderBy:'-id'" type="item-text-wrap">
+        <h2>{{task.label}}</h2>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+        <ion-option-button class="button-balanced mark-as-done" ng-click="markAsDone(task)">
+          Done
+        </ion-option-button>
+        <ion-option-button class="button-assertive remove" ng-click="remove(task)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>
