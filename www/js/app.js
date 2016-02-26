@@ -46,7 +46,7 @@ angular.module('todo', ['ionic', 'todoServices', 'todoControllers'])
   .state('tab.done', {
     url: '/done',
     views: {
-      'tab-chats': {
+      'tab-done': {
         templateUrl: 'templates/tab-done.html',
         controller: 'DoneCtrl'
       }
