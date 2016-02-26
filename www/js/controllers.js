@@ -27,4 +27,9 @@ angular.module('todoControllers', [])
 
   .controller('DoneCtrl', function($scope, Tasks) {
     $scope.tasks = Tasks.getDone();
+
+    $scope.remove = function(task){
+      Tasks.remove(task.id);
+      $scope.tasks = Tasks.getDone();
+    };
   });

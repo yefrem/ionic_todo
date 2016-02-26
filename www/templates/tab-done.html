@@ -1,7 +1,7 @@
 <ion-view view-title="Done ({{tasks.length}})">
   <ion-content class="padding">
     <ion-list>
-      <ion-item class="item-remove-animate done-task" ng-repeat="task in tasks | orderBy:'-id'" type="item-text-wrap">
+      <ion-item class="item-remove-animate item-icon-right done-task" ng-repeat="task in tasks | orderBy:'-id'" type="item-text-wrap">
         <h2>{{task.label}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
 
