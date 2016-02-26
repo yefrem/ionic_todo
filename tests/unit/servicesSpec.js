@@ -6,7 +6,7 @@ describe('service', function() {
   beforeEach(module('todo'));
   beforeEach(function(){
     tasksBackup = window.localStorage['todoTasks'];
-    window.localStorage['todoTasks'] = JSON.stringify([
+    window.localStorage['todoTasks'] = angular.toJson([
       {
         id: 1,
         label: 'Undone Task 1',
@@ -64,6 +64,19 @@ describe('service', function() {
       done: 0
     });
     expect(Tasks.get(6).label).toEqual('New Task');
+  }));
+
+  it('creates new task with correct ID when no tasks are present', inject(function(Tasks) {
+    var bak = window.localStorage['todoTasks'];
+    window.localStorage['todoTasks'] = undefined;
+    Tasks.reload();
+    Tasks.add({
+      label: 'New Task',
+      done: 0
+    });
+    expect(Tasks.get(1).label).toEqual('New Task');
+
+    window.localStorage['todoTasks'] = bak;
   }));
 
   it('marks task as done', inject(function(Tasks) {

@@ -3,11 +3,7 @@ angular.module('todoServices', [])
 .factory('Tasks', function() {
   var tasks;
 
-  try {
-    tasks = JSON.parse(window.localStorage['todoTasks']);
-  } catch (e){
-    tasks = [];
-  }
+  loadData();
 
   function getIndexById(id){
     for (var i in tasks){
@@ -20,7 +16,16 @@ angular.module('todoServices', [])
   }
 
   function persist(){
-    window.localStorage['todoTasks'] = JSON.stringify(tasks);
+    window.localStorage['todoTasks'] = angular.toJson(tasks);
+  }
+
+  function loadData(){
+    // added this only for testing purpose
+    try {
+      tasks = JSON.parse(window.localStorage['todoTasks']);
+    } catch (e){
+      tasks = [];
+    }
   }
 
   return {
@@ -51,7 +56,8 @@ angular.module('todoServices', [])
 
     add: function(task){
       // TODO: maybe could add some validation, but not now
-      task.id = tasks[tasks.length - 1].id + 1;
+      // TODO: I should have added a test for empty set case but don't know how to skip beforeEach and not sure how to organize it better without skipping
+      task.id = tasks.length ? tasks[tasks.length - 1].id + 1 : 1;
       tasks.push(task);
       persist();
     },
@@ -70,6 +76,10 @@ angular.module('todoServices', [])
       if (i = getIndexById(id)){
         tasks.splice(i, 1);
       }
+    },
+
+    reload: function(){
+      loadData();
     }
   };
 });
