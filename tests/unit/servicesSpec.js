@@ -86,6 +86,7 @@ describe('service', function() {
 
   it('removes task', inject(function(Tasks) {
     Tasks.remove(1);
+    Tasks.reload(); // check if change persisted
     expect(Tasks.get(1)).toEqual(false);
   }));
 });

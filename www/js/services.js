@@ -75,6 +75,7 @@ angular.module('todoServices', [])
       var i;
       if (i = getIndexById(id)){
         tasks.splice(i, 1);
+        persist();
       }
     },
 

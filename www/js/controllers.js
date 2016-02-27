@@ -32,4 +32,12 @@ angular.module('todoControllers', [])
       Tasks.remove(task.id);
       $scope.tasks = Tasks.getDone();
     };
+
+    $scope.clear = function(){
+      var arr = $scope.tasks;
+        for (var i in  arr){
+        Tasks.remove(arr[i].id);
+        $scope.tasks = Tasks.getDone();
+      };
+    };
   });
